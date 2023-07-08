@@ -22,29 +22,29 @@ data "aws_eks_cluster_auth" "cluster" {
   name  = module.eks[0].cluster_id
 }
 
-module "eks" {
-  count                  = local.install_eks_cluster ? 1 : 0
-  source                 = "terraform-aws-modules/eks/aws"
-  version                = "17.24.0"
-  kubeconfig_api_version = "client.authentication.k8s.io/v1beta1"
+# module "eks" {
+#   count                  = local.install_eks_cluster ? 1 : 0
+#   source                 = "terraform-aws-modules/eks/aws"
+#   version                = "17.24.0"
+#   kubeconfig_api_version = "client.authentication.k8s.io/v1beta1"
 
-  cluster_name    = "${local.cluster_id}-eks"
-  cluster_version = "1.27"
-  subnets         = module.vpc.private_subnets
-  vpc_id          = module.vpc.vpc_id
+#   cluster_name    = "${local.cluster_id}-eks"
+#   cluster_version = "1.27"
+#   subnets         = module.vpc.private_subnets
+#   vpc_id          = module.vpc.vpc_id
 
-  manage_aws_auth = false
+#   manage_aws_auth = false
 
-  node_groups = {
-    application = {
-      name_prefix      = "hashicups"
-      instance_types   = ["t3a.medium"]
-      desired_capacity = 3
-      max_capacity     = 3
-      min_capacity     = 3
-    }
-  }
-}
+#   node_groups = {
+#     application = {
+#       name_prefix      = "hashicups"
+#       instance_types   = ["t3a.medium"]
+#       desired_capacity = 3
+#       max_capacity     = 3
+#       min_capacity     = 3
+#     }
+#   }
+# }
 
 # # The HVN created in HCP
 # resource "hcp_hvn" "main" {
