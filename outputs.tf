@@ -32,15 +32,15 @@ output "next_steps" {
 #   ${local.install_demo_app ? "The demo app, HashiCups, Has been installed for you and its components registered in Consul." : ""}
 #   ${local.install_demo_app ? "To access HashiCups navigate to: ${module.demo_app[0].hashicups_url}" : ""}
 
-  # To access Consul from your local client run:
-  # export CONSUL_HTTP_ADDR="${hcp_consul_cluster.main.consul_public_endpoint_url}"
-  # export CONSUL_HTTP_TOKEN=$(terraform output consul_root_token)
-  
+# To access Consul from your local client run:
+# export CONSUL_HTTP_ADDR="${hcp_consul_cluster.main.consul_public_endpoint_url}"
+# export CONSUL_HTTP_TOKEN=$(terraform output consul_root_token)
+
 #   ${local.install_eks_cluster ? "You can access your provisioned eks cluster by first running following command" : ""}
 #   ${local.install_eks_cluster ? "export KUBECONFIG=$(terraform output -raw kubeconfig_filename)" : ""}    
 
 #   Consul has been installed in the default namespace. To explore what has been installed run:
-  
+
 #   kubectl get pods
 
 #   EOF

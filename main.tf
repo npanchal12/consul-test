@@ -46,35 +46,35 @@ module "eks" {
   }
 }
 
-# # The HVN created in HCP
-# resource "hcp_hvn" "main" {
-#   hvn_id         = local.hvn_id
-#   cloud_provider = "aws"
-#   region         = local.hvn_region
-#   cidr_block     = "172.25.32.0/20"
-# }
+# The HVN created in HCP
+resource "hcp_hvn" "main" {
+  hvn_id         = local.hvn_id
+  cloud_provider = "aws"
+  region         = local.hvn_region
+  cidr_block     = "172.25.32.0/20"
+}
 
-# module "aws_hcp_consul" {
-#   source  = "hashicorp/hcp-consul/aws"
-#   version = "~> 0.8.9"
+module "aws_hcp_consul" {
+  source  = "hashicorp/hcp-consul/aws"
+  version = "~> 0.8.9"
 
-#   hvn                = hcp_hvn.main
-#   vpc_id             = module.vpc.vpc_id
-#   subnet_ids         = module.vpc.private_subnets
-#   route_table_ids    = module.vpc.private_route_table_ids
-#   security_group_ids = local.install_eks_cluster ? [module.eks[0].cluster_primary_security_group_id] : [""]
-# }
+  hvn                = hcp_hvn.main
+  vpc_id             = module.vpc.vpc_id
+  subnet_ids         = module.vpc.private_subnets
+  route_table_ids    = module.vpc.private_route_table_ids
+  security_group_ids = local.install_eks_cluster ? [module.eks[0].cluster_primary_security_group_id] : [""]
+}
 
-# resource "hcp_consul_cluster" "main" {
-#   cluster_id      = local.cluster_id
-#   hvn_id          = hcp_hvn.main.hvn_id
-#   public_endpoint = true
-#   tier            = "development"
-# }
+resource "hcp_consul_cluster" "main" {
+  cluster_id      = local.cluster_id
+  hvn_id          = hcp_hvn.main.hvn_id
+  public_endpoint = true
+  tier            = "development"
+}
 
-# resource "hcp_consul_cluster_root_token" "token" {
-#   cluster_id = hcp_consul_cluster.main.id
-# }
+resource "hcp_consul_cluster_root_token" "token" {
+  cluster_id = hcp_consul_cluster.main.id
+}
 
 # module "eks_consul_client" {
 #   source  = "hashicorp/hcp-consul/aws//modules/hcp-eks-client"
