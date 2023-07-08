@@ -12,15 +12,15 @@
 #   enable_dns_hostnames = true
 # }
 
-# data "aws_eks_cluster" "cluster" {
-#   count = local.install_eks_cluster ? 1 : 0
-#   name  = module.eks[0].cluster_id
-# }
+data "aws_eks_cluster" "cluster" {
+  count = local.install_eks_cluster ? 1 : 0
+  name  = module.eks[0].cluster_id
+}
 
-# data "aws_eks_cluster_auth" "cluster" {
-#   count = local.install_eks_cluster ? 1 : 0
-#   name  = module.eks[0].cluster_id
-# }
+data "aws_eks_cluster_auth" "cluster" {
+  count = local.install_eks_cluster ? 1 : 0
+  name  = module.eks[0].cluster_id
+}
 
 # module "eks" {
 #   count                  = local.install_eks_cluster ? 1 : 0
