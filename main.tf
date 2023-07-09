@@ -97,10 +97,10 @@ module "eks_consul_client" {
   depends_on = [module.eks]
 }
 
-module "demo_app" {
-  count   = local.install_demo_app ? 1 : 0
-  source  = "hashicorp/hcp-consul/aws//modules/k8s-demo-app"
-  version = "~> 0.8.9"
+# module "demo_app" {
+#   count   = local.install_demo_app ? 1 : 0
+#   source  = "hashicorp/hcp-consul/aws//modules/k8s-demo-app"
+#   version = "~> 0.8.9"
 
-  depends_on = [module.eks_consul_client]
-}
+#   depends_on = [module.eks_consul_client]
+# }
