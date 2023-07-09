@@ -35,7 +35,7 @@ module "eks" {
   
 
 
-  manage_aws_auth = true
+  manage_aws_auth = false
 
   node_groups = {
     application = {
