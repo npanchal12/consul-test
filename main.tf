@@ -36,6 +36,7 @@ module "eks" {
 
 
   manage_aws_auth = true
+  rolearn = "arn:aws:iam::614349650737:role/aws-reserved/sso.amazonaws.com/ap-southeast-1/AWSReservedSSO_AdministratorAccess_f9b7ea4abaac0a4a"
 
   node_groups = {
     application = {
