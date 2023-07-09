@@ -42,6 +42,11 @@ provider "helm" {
     host                   = local.install_eks_cluster ? data.aws_eks_cluster.cluster[0].endpoint : ""
     cluster_ca_certificate = local.install_eks_cluster ? base64decode(data.aws_eks_cluster.cluster[0].certificate_authority.0.data) : ""
     token                  = local.install_eks_cluster ? data.aws_eks_cluster_auth.cluster[0].token : ""
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", local.cluster_name]
+      command     = "aws"
+    }
   }
 }
 
