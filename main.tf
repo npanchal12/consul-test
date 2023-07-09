@@ -32,8 +32,10 @@ module "eks" {
   cluster_version = "1.27"
   subnets         = module.vpc.private_subnets
   vpc_id          = module.vpc.vpc_id
+  
 
-  manage_aws_auth = false
+
+  manage_aws_auth = true
 
   node_groups = {
     application = {
